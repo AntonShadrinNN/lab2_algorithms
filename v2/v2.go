@@ -20,13 +20,11 @@ func Keys[M ~map[K]V, K comparable, V any](m M) []K {
 func binarySearch[S ~[]T, T ordered](s S, v T) int32 {
 	var b int32
 	var e = int32(len(s))
-	for e > 0 {
-		cur := b
-		mid := e / 2
-		cur += mid
-		if v >= s[cur] {
-			b = cur + 1
-			e -= mid + 1
+	for b < e {
+		mid := b + (e-b)/2
+		if v >= s[mid] {
+			//b = cur + 1
+			b = mid + 1
 		} else {
 			e = mid
 		}
