@@ -1,9 +1,6 @@
 package src
 
 import (
-	"errors"
-	"fmt"
-	internalerrs "lab2_algorithms/internal/errors"
 	"sort"
 
 	"lab2_algorithms/internal"
@@ -74,9 +71,9 @@ func buildEmpty(sample []int32, li, ri int32) *node {
 	return newNode(left, right, left.lRange, right.rRange, left.sum+right.sum)
 }
 
-// buildPersistentTree builds a persistent tree for rectangles type given
+// BuildPersistentTree builds a persistent tree for rectangles type given
 // returns []*node, where every single element reflects the state of the tree at the i-th change
-func buildPersistentTree(rects *internal.Rectangles, compX, compY []int32) []*node {
+func BuildPersistentTree(rects *internal.Rectangles, compX, compY []int32) []*node {
 	events := make([]internal.Event, 0, len(*rects)*2)
 	persistentNodes := make([]*node, 0, len(*rects)*2)
 
@@ -138,25 +135,23 @@ func searchInTree(root *node, val int32) int32 {
 }
 
 // PersistenceSegmentTree runs algorithm and prints result to stdout
-func PersistenceSegmentTree() {
-	rects, ps, err := internal.ReadData()
+func PersistenceSegmentTree(rects internal.Rectangles, ps internal.Points) {
+	//rects, ps, err := internal.ReadData()
 
 	// no rectangles in input data
-	if errors.Is(err, internalerrs.EmptyRectangles) {
-		for range ps {
-			fmt.Print(0, " ")
-		}
-		return
-	}
-	// unexpected error
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
+	//if errors.Is(err, internalerrs.EmptyRectangles) {
+	//	for range ps {
+	//		fmt.Print(0, " ")
+	//	}
+	//	return
+	//}
+	//// unexpected error
+	//if err != nil {
+	//	fmt.Println(err)
+	//	return
+	//}
 	compX, compY := rects.CompressCoordinates()
-	tree := buildPersistentTree(&rects, compX, compY)
-
+	tree := BuildPersistentTree(&rects, compX, compY)
 	var res []int32
 	for _, p := range ps {
 		// cX is a condition of a tree
@@ -172,7 +167,7 @@ func PersistenceSegmentTree() {
 		res = append(res, searchInTree(tree[cX], cY))
 	}
 
-	for _, v := range res {
-		fmt.Print(v, " ")
-	}
+	//for _, v := range res {
+	//	fmt.Print(v, " ")
+	//}
 }

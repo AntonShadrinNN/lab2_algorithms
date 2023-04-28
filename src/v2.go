@@ -1,19 +1,24 @@
 package src
 
 import (
-	"fmt"
 	"lab2_algorithms/internal"
 )
 
+//rects, p, err := internal.ReadData()
+//if err != nil {
+//	fmt.Println(err)
+//	return
+//}
+
+//for _, v := range res {
+//	fmt.Print(v, " ")
+//}
+//fmt.Println()
+
 func CompressedMap(rects internal.Rectangles, p internal.Points) {
-	rects, p, err := internal.ReadData()
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	var res []int32
+	res := make([]int32, 0, len(p))
 	compX, compY, rectMap := rects.BuildMap()
-	fmt.Println(rectMap)
+
 	for i := range p {
 		pX := internal.BinarySearch(compX, p[i].X)
 		pY := internal.BinarySearch(compY, p[i].Y)
@@ -24,9 +29,4 @@ func CompressedMap(rects internal.Rectangles, p internal.Points) {
 		}
 		res = append(res, rectMap[pY][pX])
 	}
-
-	for _, v := range res {
-		fmt.Print(v, " ")
-	}
-	fmt.Println()
 }
