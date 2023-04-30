@@ -5,18 +5,19 @@ import (
 	"github.com/go-echarts/go-echarts/v2/charts"
 	"github.com/go-echarts/go-echarts/v2/opts"
 	"github.com/go-echarts/go-echarts/v2/types"
+	"math"
 	"os"
 )
 
 func getLineItems(data []int64) []opts.LineData {
 	items := make([]opts.LineData, 0, len(data))
 	for _, p := range data {
-		//val := math.Log(float64(p))
-		//if val == math.Inf(-1) {
-		//	val = 0
-		//}
+		val := math.Log(float64(p))
+		if val == math.Inf(-1) {
+			val = 0
+		}
 		items = append(items, opts.LineData{
-			Value: p,
+			Value: val,
 		})
 		//fmt.Println(val)
 	}

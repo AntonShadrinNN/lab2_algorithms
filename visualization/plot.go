@@ -7,14 +7,14 @@ import (
 )
 
 func Plot() {
-	totalMap, prepMap, execMap := v1.Bench()
+	_, _, execMap := v1.Bench()
 	totalBrute := v2.Bench()
-	totalTree, prepTree, execTree := v3.Bench()
+	_, _, execTree := v3.Bench()
 
-	Draw(0, 18, "Total time", "visualization/res/total_time",
-		totalMap, totalBrute, totalTree)
-	Draw(0, 18, "Preparation time", "visualization/res/prep_time",
-		prepMap, nil, prepTree)
-	Draw(0, 18, "Execution time", "visualization/res/exec_time",
+	//Draw(0, 18, "Total time", "visualization/res/exec_time",
+	//	totalMap, totalBrute, totalTree)
+	//Draw(0, 18, "Preparation time", "visualization/res/prep_time",
+	//	prepMap, nil, prepTree)
+	Draw(0, 18, "Execution time", "visualization/res/exec_time_log_new",
 		execMap, totalBrute, execTree)
 }
