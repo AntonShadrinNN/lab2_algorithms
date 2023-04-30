@@ -1,7 +1,6 @@
 package src
 
 import (
-	"fmt"
 	"lab2_algorithms/internal"
 )
 
@@ -15,18 +14,18 @@ func checkSinglePoint(p internal.Point, rects *internal.Rectangles) int32 {
 	return count
 }
 
-func BruteForce() {
-	r, ps, err := internal.ReadData()
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	var res []int32
+func BruteForce(r internal.Rectangles, ps internal.Points) {
+	//r, ps, err := internal.ReadData()
+	//if err != nil {
+	//	fmt.Println(err)
+	//	return
+	//}
+	res := make([]int32, 0, len(ps))
 	for _, p := range ps {
 		res = append(res, checkSinglePoint(p, &r))
 	}
-	for _, val := range res {
-		fmt.Print(val)
-		fmt.Print(" ")
-	}
+	//for _, val := range res {
+	//	fmt.Print(val)
+	//	fmt.Print(" ")
+	//}
 }

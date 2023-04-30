@@ -3,6 +3,7 @@ package internal
 import (
 	"fmt"
 	"sort"
+	"sync"
 )
 
 // Ordered represents types comparable with <, <=, >, >=, ==, !=
@@ -95,4 +96,10 @@ func NewEvent(x, lRange, rRange, status int32) Event {
 		E:    rRange,
 		Stat: status,
 	}
+}
+
+type TestPair struct {
+	m sync.Mutex
+	N int32
+	T int64
 }
